@@ -23,6 +23,8 @@ import {
     Agenda
 } from 'react-native-calendars'
 
+import { getWeeks, approve } from '../api/routes'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -49,6 +51,11 @@ export default class Home extends Component {
             user: "john",
             details: { year: '', day: '', timestamp: '', dateString: '', month: '' }
         }
+    }
+
+    componentWillMount() {
+        getWeeks('10', '2017', '3')
+        approve('8', '3')
     }
 
     handleDetails = (det) => {
