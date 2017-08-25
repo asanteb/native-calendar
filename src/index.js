@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Home from './components/Home.js'
 import {
     StyleSheet,
-    Text,
     View,
     AppRegistry,
 } from 'react-native';
@@ -10,16 +9,25 @@ import {
 import { 
     NativeRouter,
     Route,
-    Link
+    Link,
+    Redirect,
+    withRouter
 } from 'react-router-native';
 
-
-
-// const Home = () => (
-//   <Text style={styles.header}>
-//     Home
-//   </Text>
-// )
+import {
+    Container,
+    Header,
+    Content,
+    Button,
+    Text,
+    Footer,
+    FooterTab,
+    Card,
+    CardItem,
+    Body,
+    Title,
+    Subtitle,
+} from 'native-base'
 
 const About = () => (
   <Text style={styles.header}>
@@ -27,73 +35,49 @@ const About = () => (
   </Text>
 )
 
-const Topic = ({ match }) => (
-  <Text style={styles.topic}>
-    {match.params.topicId}
-  </Text>
-)
 
-const Topics = ({ match }) => (
-  <View>
-    <Text style={styles.header}>Topics</Text>
-    <View>
-      <Link
-        to={`${match.url}/rendering`}
-        style={styles.subNavItem}
-        underlayColor='#f0f4f7'>
-          <Text>Rendering with React</Text>
-      </Link>
-      <Link
-        to={`${match.url}/components`}
-        style={styles.subNavItem}
-        underlayColor='#f0f4f7'>
-          <Text>Components</Text>
-      </Link>
-      <Link
-        to={`${match.url}/props-v-state`}
-        style={styles.subNavItem}
-        underlayColor='#f0f4f7'>
-          <Text>Props v. State</Text>
-      </Link>
-    </View>
+const Approve = withRouter(({ history }) => (
+    <Button
+        onPress={() => { history.push('/approve') }}
+    >
+        <Text>Approve</Text>
+    </Button>
+))
 
-    <Route path={`${match.url}/:topicId`} component={Topic}/>
-    <Route exact path={match.url} render={() => (
-      <Text style={styles.topic}>Please select a topic.</Text>
-    )} />
-  </View>
-)
+const Calendar = withRouter(({ history }) => (
+    <Button
+        onPress={() => { history.push('/') }}
+    >
+        <Text>Calendar</Text>
+    </Button>
+))
 
 export default class Main extends React.Component {
+    constructor(){
+        super()
+    }
     render() {
+        console.log(this.props)
         return (
             <NativeRouter>
-                <View style={styles.container}>
-                <View style={styles.nav}>
-                    <Link
-                    to="/"
-                    underlayColor='#f0f4f7'
-                    style={styles.navItem}>
-                        <Text>Settings</Text>
-                    </Link>
-                    <Link
-                    to="/about"
-                    underlayColor='#f0f4f7'
-                    style={styles.navItem}>
-                        <Text>Appointments</Text>
-                    </Link>
-                    <Link
-                    to="/topics"
-                    underlayColor='#f0f4f7'
-                    style={styles.navItem} >
-                        <Text>Approve/Reject</Text>
-                    </Link>
-                </View>
-
-                <Route exact path="/" component={Home}/>
-                <Route path="/about" component={About}/>
-                <Route path="/topics" component={Topics}/>
-                </View>
+                <Container>
+                    <Header>
+                        <Body style={styles.navItem}>
+                            <Title>Title</Title>
+                            <Subtitle>Subtitle</Subtitle>
+                        </Body>   
+                    </Header>
+                    <Content>
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/approve" component={About}/>
+                    </Content>
+                    <Footer>
+                        <FooterTab>
+                            <Calendar />
+                            <Approve />
+                        </FooterTab>
+                    </Footer>
+                </Container>
             </NativeRouter>
         )
     }
