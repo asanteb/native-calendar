@@ -4,7 +4,14 @@ import {
     Text,
     View,
     AppRegistry,
+    ScrollView,
 } from 'react-native';
+
+import {
+    Calendar,
+    CalendarList,
+    Agenda
+} from 'react-native-calendars'
 
 const styles = StyleSheet.create({
   container: {
@@ -28,9 +35,21 @@ const styles = StyleSheet.create({
 export default class Home extends Component {
   render() {
     return (
-        <Text>
-            Welcome to Native Poopy Do!
-        </Text>
+        <ScrollView>
+            <Calendar
+                current={'2017-03-01'}
+                minDate={'2015-08-10'}
+                maxDate={'2018-05-30'}
+                onDayPress={(day) => {console.log('selected day', day)}}
+                monthFormat={'yyyy MM'}
+                onMonthChange={(month) => {console.log('month changed', month)}}
+                hideArrows={true}
+                renderArrow={(direction) => (<Arrow />)}
+                hideExtraDays={true}
+                disableMonthChange={true}
+                firstDay={1}
+            />
+        </ScrollView>
     );
   }
 }

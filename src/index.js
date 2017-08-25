@@ -74,19 +74,19 @@ export default class Main extends React.Component {
                     to="/"
                     underlayColor='#f0f4f7'
                     style={styles.navItem}>
-                        <Text>Home</Text>
+                        <Text>Settings</Text>
                     </Link>
                     <Link
                     to="/about"
                     underlayColor='#f0f4f7'
                     style={styles.navItem}>
-                        <Text>About</Text>
+                        <Text>Appointments</Text>
                     </Link>
                     <Link
                     to="/topics"
                     underlayColor='#f0f4f7'
                     style={styles.navItem} >
-                        <Text>Topics</Text>
+                        <Text>Approve/Reject</Text>
                     </Link>
                 </View>
 
